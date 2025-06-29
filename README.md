@@ -1,6 +1,6 @@
 # 🧠 Telo – Telegram Productivity Bot
 
-**Telo** is a stateless, menu-based Telegram bot built with Python (`python-telegram-bot` v22.1) and PocketBase to help you:
+**Telo** is a stateless, menu-based Telegram bot built with Node.js (`telegraf`) and PocketBase to help you:
 
 - Reflect through journal prompts
 - Plan your day
@@ -28,12 +28,11 @@ It uses inline buttons, a clean callback system, and stores data via PocketBase�
 
 ```
 telegram_pocketbase_bot/
-├── bot.py                        # Core bot logic
-├── requirements.txt              # Python dependencies
+├── index.js                      # Core bot logic
+├── package.json                  # Node dependencies
 ├── .env.example                  # Sample env variables
 ├── Procfile                      # Dokploy process config
 ├── pb_schema_journal_entries.json # PocketBase collection schema
-├── agents.json                   # List of bot agents/modules
 └── README.md
 ```
 
@@ -44,7 +43,7 @@ telegram_pocketbase_bot/
 1. **Install dependencies**
 
 ```bash
-pip install -r requirements.txt
+npm install
 ```
 
 2. **Copy and configure your .env file**
@@ -70,7 +69,7 @@ This bot uses inline buttons with `callback_data` like:
 flow=journal;step=1
 ```
 
-Your bot parses this data and decides what to show next, using logic in `bot.py`.
+Your bot parses this data and decides what to show next, using logic in `index.js`.
 
 Only important entries like **journal submissions** or **quotes** are stored in PocketBase.
 
@@ -104,13 +103,6 @@ Only important entries like **journal submissions** or **quotes** are stored in 
 
 ---
 
-## 🤖 Agents File
-
-This project uses modular design. Each bot "agent" handles a functional module.
-
-See `agents.json`.
-
----
 
 ## 📄 License
 

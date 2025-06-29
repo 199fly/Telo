@@ -1,0 +1,82 @@
+# TELO - AI Coding Agent Instructions
+
+This file provides meta instructions for AI agents working on the TELO project. It defines how agents should access context, where to log work, and how to handle schema and logic consistency.
+
+---
+
+## 🔧 Primary Files & Responsibilities
+
+| File                | Purpose                                                          |
+| ------------------- | ---------------------------------------------------------------- |
+| `README.md`         | Project overview, vision, goals, and high-level roadmap          |
+| `.dev/tasks.md`     | Active development tasks, WIP features, and priority items       |
+| `.dev/CHANGELOG.md` | Log of meaningful changes in features, structure, or schema      |
+| `.dev/schema.json`  | PocketBase-friendly full schema definition (always up to date)   |
+| `pb.js`             | PocketBase connection utility, all schema helpers reference this |
+| `/workflows/`       | All feature logic (e.g., onboarding, journal, work mode)         |
+
+---
+
+## 🧠 Core Workflow Instructions
+
+### 1. Project Context Access
+
+* Always read `README.md` before performing roadmap-level work
+* Pull the latest logic and user flows from `workflows/*.js`
+* Reference `tasks.md` to prioritize what to work on
+
+### 2. Logging Protocol
+
+* All meaningful changes must be recorded in `.dev/CHANGELOG.md`
+* Each PR/commit should include a short changelog entry
+
+### 3. Schema Maintenance
+
+* Any change to PocketBase collections **must** be reflected in `schema.json`
+* Update the schema manually or via CLI script if schema evolves
+* Validate consistency between:
+
+  * Collection names
+  * Field types and options
+  * Relations and unique constraints
+
+### 4. Bot Behavior Rules
+
+* All logic must key off `user_id` from Telegram
+* Always wrap outbound messages and button rows in helpers for easy reuse
+* Keep message structure declarative: content + inline buttons grouped by logic
+* Use `reply_markup` for inline buttons; `force_reply` for required free text
+
+### 5. Journal + AI Agents
+
+* When generating journal reflections or summaries:
+
+  * Pull the last 3–5 entries
+  * Reference user's `goal` and tone in reflections
+  * Never repeat the user’s text verbatim — paraphrase for clarity or insight
+  * Store AI response in a field like `ai_summary` in `journal_entries`
+
+### 6. Test Fixtures & Debugging
+
+* Store mock Telegram payloads in `.test/fixtures/*.json`
+* Name test users consistently: `user_0001`, `user_0002`, etc.
+* Simulate all input types: button press, free text, habit logs, journal routines
+
+---
+
+## ✅ Conventions Summary
+
+* Maintain `schema.json` integrity
+* Log in `CHANGELOG.md`
+* Track progress via `tasks.md`
+* Follow prompt design and AI tone rules
+* Use only Telegraf.js-compatible message formats
+
+---
+
+## 🧩 Optional Extensions
+
+* Add auto-validator for schema to compare PocketBase live schema vs `schema.json`
+* Create test generators for habit logs and journal entries
+
+> TELO is a mindful assistant, not just a productivity tool. Build with intention, empathy, and simplicity.

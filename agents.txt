@@ -1,0 +1,6 @@
+This file is used by AI agents working on the TELO project.
+It provides a single place for meta instructions and quick reference.
+
+- Review the README for project goals and roadmap.
+- Check the .dev/tasks.md file for current development tasks.
+- Log noteworthy changes in .dev/CHANGELOG.md.

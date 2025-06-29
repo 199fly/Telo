@@ -1,7 +1,12 @@
 import os
 import requests
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, CallbackContext
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    CallbackQueryHandler,
+    CallbackContext,
+)
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,8 +26,7 @@ def handle_callback(update: Update, context: CallbackContext):
     data = query.data
 
     if data == "menu:journal":
-        query.edit_message_text("Starting journal...
-(Example Entry Saved)")
+        query.edit_message_text("Starting journal...\n(Example Entry Saved)")
         save_journal(query.from_user.id, "morning", {"q1": "Great", "q2": "Focus today"})
     elif data == "menu:quotes":
         query.edit_message_text("Quotes feature coming soon.")

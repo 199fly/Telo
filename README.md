@@ -1,6 +1,6 @@
 # 🧠 Telo – Telegram Productivity Bot
 
-**Telo** is a stateless, menu-based Telegram bot built with Python and PocketBase to help you:
+**Telo** is a stateless, menu-based Telegram bot built with Python (`python-telegram-bot` v22.1) and PocketBase to help you:
 
 - Reflect through journal prompts
 - Plan your day

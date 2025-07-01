@@ -14,6 +14,9 @@ importers:
       dotenv:
         specifier: ^16.3.1
         version: 16.6.1
+      pocketbase:
+        specifier: ^0.26.1
+        version: 0.26.1
       telegraf:
         specifier: ^4.12.2
         version: 4.16.3
@@ -162,6 +165,9 @@ packages:
   p-timeout@4.1.0:
     resolution: {integrity: sha512-+/wmHtzJuWii1sXn3HCuH/FTwGhrp4tmJTxSKJbfS+vkipci6osxXM5mY0jUiRzWKMTgUT8l7HFbeSwZAynqHw==}
     engines: {node: '>=10'}
+
+  pocketbase@0.26.1:
+    resolution: {integrity: sha512-fjcPDpxyqTZCwqGUTPUV7vssIsNMqHxk9GxbhxYHPEf18RqX2d9cpSqbbHk7aas30jqkgptuKfG7aY/Mytjj3g==}
 
   proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
@@ -313,6 +319,8 @@ snapshots:
       whatwg-url: 5.0.0
 
   p-timeout@4.1.0: {}
+
+  pocketbase@0.26.1: {}
 
   proxy-from-env@1.1.0: {}
 

@@ -1,0 +1,67 @@
+{
+  "collections": [
+    {
+      "name": "users",
+      "type": "base",
+      "schema": [
+        { "name": "goal", "type": "text", "required": false },
+        { "name": "quotes", "type": "json", "required": false },
+        { "name": "habits", "type": "json", "required": false }
+      ],
+      "indexes": [],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "",
+      "updateRule": "",
+      "deleteRule": ""
+    },
+    {
+      "name": "journal_entries",
+      "type": "base",
+      "schema": [
+        { "name": "user_id", "type": "text", "required": true },
+        { "name": "routine_type", "type": "text", "required": true },
+        { "name": "answers", "type": "json", "required": true }
+      ],
+      "indexes": [],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "",
+      "updateRule": "",
+      "deleteRule": ""
+    },
+    {
+      "name": "habit_logs",
+      "type": "base",
+      "schema": [
+        { "name": "user_id", "type": "text", "required": true },
+        { "name": "habit_name", "type": "text", "required": true },
+        { "name": "date", "type": "text", "required": true },
+        { "name": "count", "type": "number", "required": true }
+      ],
+      "indexes": [],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "",
+      "updateRule": "",
+      "deleteRule": ""
+    },
+    {
+      "name": "work_sessions",
+      "type": "base",
+      "schema": [
+        { "name": "user_id", "type": "text", "required": true },
+        { "name": "date", "type": "text", "required": true },
+        { "name": "total_minutes", "type": "number", "required": true },
+        { "name": "sprint_count", "type": "number", "required": true },
+        { "name": "reflections", "type": "json", "required": false }
+      ],
+      "indexes": [],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "",
+      "updateRule": "",
+      "deleteRule": ""
+    }
+  ]
+}

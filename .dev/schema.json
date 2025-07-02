@@ -4,6 +4,9 @@
       "name": "users",
       "type": "base",
       "schema": [
+        { "name": "user_id", "type": "text", "required": true },
+        { "name": "first_name", "type": "text", "required": false },
+        { "name": "username", "type": "text", "required": false },
         { "name": "goal", "type": "text", "required": false },
         { "name": "quotes", "type": "json", "required": false },
         { "name": "habits", "type": "json", "required": false }

@@ -1,24 +1,24 @@
 require('dotenv').config();
-const { Telegraf, Markup } = require('telegraf');
-const axios = require('axios');
+const { Telegraf } = require('telegraf');
+const onboarding = require('./workflows/onboarding');
+const journal = require('./workflows/journal');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const POCKETBASE_URL = process.env.POCKETBASE_URL;
+bot.start((ctx) => onboarding.start(ctx));
+bot.command('journal', (ctx) => journal.start(ctx));
 
-bot.start((ctx) => {
-  return ctx.reply(
-    'Choose an option:',
-    Markup.inlineKeyboard([
-      [Markup.button.callback('Journal', 'menu:journal')],
-      [Markup.button.callback('Quotes', 'menu:quotes')],
-    ])
-  );
+bot.on('text', async (ctx, next) => {
+  const onboarded = await onboarding.handleText(ctx);
+  if (onboarded) return;
+  const journaled = await journal.handleText(ctx);
+  if (!journaled && next) {
+    return next();
+  }
 });
 
 bot.action('menu:journal', async (ctx) => {
   await ctx.answerCbQuery();
-  await ctx.editMessageText('Starting journal...\n(Example Entry Saved)');
-  await saveJournal(ctx.from.id, 'morning', { q1: 'Great', q2: 'Focus today' });
+  await journal.start(ctx);
 });
 
 bot.action('menu:quotes', async (ctx) => {
@@ -26,20 +26,7 @@ bot.action('menu:quotes', async (ctx) => {
   await ctx.editMessageText('Quotes feature coming soon.');
 });
 
-async function saveJournal(userId, routineType, answers) {
-  try {
-    await axios.post(
-      `${POCKETBASE_URL}/api/collections/journal_entries/records`,
-      {
-        user_id: String(userId),
-        routine_type: routineType,
-        answers,
-      },
-      { headers: { 'Content-Type': 'application/json' } }
-    );
-  } catch (e) {
-    console.error('Failed to save journal', e.message);
-  }
-}
+bot.action('ob:yes', (ctx) => onboarding.handleAction(ctx));
+bot.action('ob:no', (ctx) => onboarding.handleAction(ctx));
 
 bot.launch();

@@ -201,6 +201,13 @@ TELO is designed to:
 
 ---
 
+## Deployment with Nixpacks
+
+1. Copy `.env.example` to `.env` and set your values.
+2. Deploy to any platform supporting [Nixpacks](https://nixpacks.com/).
+3. On start, `start.sh` launches PocketBase and the bot, imports `.dev/schema.json`, and seeds the admin if missing.
+
+
 ## Final Notes
 
 TELO isn’t just another productivity tool. It’s a **daily reflection mirror**, a **mini-habit coach**, and a **guided awareness builder** — all inside Telegram.

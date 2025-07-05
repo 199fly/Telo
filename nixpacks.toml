@@ -1,0 +1,8 @@
+[phases.install]
+cmds = [
+  "pnpm install",
+  "chmod +x pocketbase/pocketbase"
+]
+
+[start]
+cmd = "bash start.sh"

@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Added Nixpacks deployment with PocketBase setup script.
 - Initial setup of agents files and updated documentation.
 - Added PocketBase schema and connection utility.
 - Implemented `/start` onboarding flow with PocketBase user storage.
@@ -9,3 +10,5 @@
   favourite quotes.
 - Fixed onboarding flow freeze when entering a quote by sending a new
   message with ForceReply.
+- Fixed deployment start script to load `.env` so `superuser upsert` works
+  without missing email errors.

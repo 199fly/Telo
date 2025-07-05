@@ -5,7 +5,7 @@ const axios = require('axios');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const POCKETBASE_URL = process.env.POCKETBASE_URL;
 
-bot.start((ctx) => {
+function showMainMenu(ctx) {
   return ctx.reply(
     'Choose an option:',
     Markup.inlineKeyboard([
@@ -13,7 +13,9 @@ bot.start((ctx) => {
       [Markup.button.callback('Quotes', 'menu:quotes')],
     ])
   );
-});
+}
+
+require('./workflows/onboarding')(bot, showMainMenu);
 
 bot.action('menu:journal', async (ctx) => {
   await ctx.answerCbQuery();

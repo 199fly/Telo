@@ -4,7 +4,7 @@ This list helps human and AI contributors coordinate work.
 
 - [x] Set up Telegram bot with Telegraf.js
 - [x] Configure PocketBase with required collections
-- [ ] Implement `/start` onboarding flow
+- [x] Implement `/start` onboarding flow
 - [ ] Add journaling feature
 - [ ] Add work mode with Pomodoro cycles
 - [ ] Implement habit tracking

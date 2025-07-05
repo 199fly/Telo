@@ -78,7 +78,8 @@ async function handleAction(ctx) {
 
   if (ctx.callbackQuery.data === 'ob:yes') {
     state.stage = 'quotes';
-    await ctx.editMessageText('Awesome! Send me your favourite quote:', {
+    await ctx.answerCbQuery();
+    await ctx.reply('Awesome! Send me your favourite quote:', {
       reply_markup: { force_reply: true },
     });
     return true;
@@ -86,6 +87,7 @@ async function handleAction(ctx) {
 
   if (ctx.callbackQuery.data === 'ob:no') {
     state.data.quotes = [];
+    await ctx.answerCbQuery();
     await ctx.editMessageText('No problem, we can add quotes later.');
     await finalize(ctx, userId, state.data);
     return true;

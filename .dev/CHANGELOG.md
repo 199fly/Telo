@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Added Nixpacks deployment with PocketBase setup script.
 - Initial setup of agents files and updated documentation.
 - Added PocketBase schema and connection utility.
 - Implemented `/start` onboarding flow with PocketBase user storage.

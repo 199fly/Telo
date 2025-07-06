@@ -10,3 +10,5 @@
   favourite quotes.
 - Fixed onboarding flow freeze when entering a quote by sending a new
   message with ForceReply.
+- Improved `initPocketBase.js` to use the PocketBase CLI for admin creation
+  when authentication fails.

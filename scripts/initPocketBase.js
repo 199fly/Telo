@@ -1,10 +1,12 @@
 require('dotenv').config();
 const fs = require('fs');
+const { execSync } = require('child_process');
 const PocketBase = require('pocketbase/cjs');
 
 const pb = new PocketBase(process.env.POCKETBASE_URL || 'http://127.0.0.1:8090');
 const adminEmail = process.env.PB_ADMIN_EMAIL || 'admin@me.com';
 const adminPassword = process.env.PB_ADMIN_PASSWORD || 'TeloAdmin123';
+const pbDir = process.env.PB_DIR || 'pb_data';
 
 async function waitForHealth() {
   for (let i = 0; i < 10; i++) {
@@ -24,12 +26,13 @@ async function waitForHealth() {
   try {
     await pb.admins.authWithPassword(adminEmail, adminPassword);
   } catch (err) {
-    await pb.admins.create({
-      email: adminEmail,
-      password: adminPassword,
-      passwordConfirm: adminPassword,
-    });
-    await pb.admins.authWithPassword(adminEmail, adminPassword);
+    try {
+      execSync(`./pocketbase/pocketbase superuser upsert "${adminEmail}" "${adminPassword}" --dir "${pbDir}"`);
+      await pb.admins.authWithPassword(adminEmail, adminPassword);
+    } catch (cliErr) {
+      console.error('Failed to ensure admin via CLI', cliErr);
+      throw cliErr;
+    }
   }
 
   const schema = JSON.parse(fs.readFileSync('.dev/schema.json', 'utf8'));

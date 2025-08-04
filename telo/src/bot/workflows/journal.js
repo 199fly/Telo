@@ -1,4 +1,4 @@
-const pb = require('../pb');
+const pb = require('../../api/pocketbase');
 const { sendMainMenu } = require('./menu');
 
 const awaitingEntry = {};

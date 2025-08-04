@@ -9,3 +9,4 @@ This list helps human and AI contributors coordinate work.
 - [ ] Add work mode with Pomodoro cycles
 - [ ] Implement habit tracking
 - [ ] Show daily dashboard summary
+- [ ] Expand routine runner to support more step types

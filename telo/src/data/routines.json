@@ -1,0 +1,10 @@
+[
+  {
+    "id": "water_counter",
+    "module": "habits",
+    "steps": [
+      { "type": "counter", "key": "water", "text": "How many glasses of water?" },
+      { "type": "log", "data": { "water": "{{water}}" } }
+    ]
+  }
+]

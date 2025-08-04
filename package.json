@@ -1,10 +1,10 @@
 {
   "name": "telo-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "telo/src/bot/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node telo/src/bot/index.js"
   },
   "packageManager": "pnpm@9.11.0",
   "dependencies": {

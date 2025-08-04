@@ -1,4 +1,4 @@
-const pb = require('../pb');
+const pb = require('../../api/pocketbase');
 const { Markup } = require('telegraf');
 const { sendMainMenu } = require('./menu');
 

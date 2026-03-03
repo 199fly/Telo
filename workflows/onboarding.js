@@ -1,4 +1,4 @@
-const pb = require('../pb');
+const { pb, ensureAdminAuth } = require('../pb');
 const { Markup } = require('telegraf');
 const { sendMainMenu } = require('./menu');
 
@@ -8,7 +8,7 @@ async function start(ctx) {
   const userId = String(ctx.from.id);
   let user;
   try {
-    user = await pb.collection('users').getFirstListItem(`user_id="${userId}"`);
+    user = await pb.collection('profiles').getFirstListItem(`user_id="${userId}"`);
   } catch (e) {
     user = null;
   }
@@ -97,7 +97,8 @@ async function handleAction(ctx) {
 }
 
 async function finalize(ctx, userId, data) {
-  await pb.collection('users').create({
+  await ensureAdminAuth();
+  await pb.collection('profiles').create({
     user_id: userId,
     first_name: data.first_name,
     username: data.username,

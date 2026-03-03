@@ -1,4 +1,4 @@
-const pb = require('../pb');
+const { pb } = require('../pb');
 const { sendMainMenu } = require('./menu');
 const { startRoutine, handleRoutineText } = require('./routines');
 
@@ -31,7 +31,7 @@ async function handleText(ctx) {
 
 async function findUser(userId) {
   try {
-    return await pb.collection('users').getFirstListItem(`user_id="${userId}"`);
+    return await pb.collection('profiles').getFirstListItem(`user_id="${userId}"`);
   } catch (err) {
     return null;
   }

@@ -1,4 +1,4 @@
-const pb = require('../pb');
+const { pb, ensureAdminAuth } = require('../pb');
 
 const ROUTINES = {
   daily_checkin: {
@@ -59,6 +59,7 @@ async function handleRoutineText(ctx) {
   const blockId = routine.blocks[state.blockIndex];
   const block = getBlockById(blockId);
 
+  await ensureAdminAuth();
   await pb.collection('block_entries').create({
     user_id: userId,
     routine_id: routine.id,

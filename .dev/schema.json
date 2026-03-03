@@ -1,35 +1,52 @@
 {
   "collections": [
     {
-      "name": "users",
+      "name": "profiles",
       "type": "base",
-      "schema": [
-        { "name": "user_id", "type": "text", "required": true },
-        { "name": "first_name", "type": "text", "required": false },
-        { "name": "username", "type": "text", "required": false },
-        { "name": "goal", "type": "text", "required": false },
-        { "name": "quotes", "type": "json", "required": false },
-        { "name": "habits", "type": "json", "required": false }
+      "indexes": [
+        "CREATE UNIQUE INDEX idx_profiles_user_id ON profiles (user_id)"
       ],
-      "indexes": ["CREATE UNIQUE INDEX idx_users_user_id ON users (user_id)"],
       "listRule": "",
       "viewRule": "",
       "createRule": "",
       "updateRule": "",
-      "deleteRule": ""
+      "deleteRule": "",
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "first_name",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "username",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "goal",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "quotes",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "habits",
+          "type": "json",
+          "required": false
+        }
+      ]
     },
     {
       "name": "block_entries",
       "type": "base",
-      "schema": [
-        { "name": "user_id", "type": "text", "required": true },
-        { "name": "routine_id", "type": "text", "required": false },
-        { "name": "block_id", "type": "text", "required": false },
-        { "name": "tags", "type": "json", "required": true },
-        { "name": "value", "type": "json", "required": true },
-        { "name": "metadata", "type": "json", "required": false },
-        { "name": "semantic_key", "type": "text", "required": false }
-      ],
       "indexes": [
         "CREATE INDEX idx_block_entries_user_id ON block_entries (user_id)",
         "CREATE INDEX idx_block_entries_routine_id ON block_entries (routine_id)",
@@ -39,40 +56,115 @@
       "viewRule": "",
       "createRule": "",
       "updateRule": "",
-      "deleteRule": ""
+      "deleteRule": "",
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "routine_id",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "block_id",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "tags",
+          "type": "json",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "json",
+          "required": true
+        },
+        {
+          "name": "metadata",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "semantic_key",
+          "type": "text",
+          "required": false
+        }
+      ]
     },
     {
       "name": "tags_registry",
       "type": "base",
-      "schema": [
-        { "name": "tag", "type": "text", "required": true },
-        { "name": "value_type", "type": "text", "required": true },
-        { "name": "semantic_dimension", "type": "text", "required": false },
-        { "name": "uniqueness_rule", "type": "text", "required": false },
-        { "name": "description", "type": "text", "required": false }
+      "indexes": [
+        "CREATE UNIQUE INDEX idx_tags_registry_tag ON tags_registry (tag)"
       ],
-      "indexes": ["CREATE UNIQUE INDEX idx_tags_registry_tag ON tags_registry (tag)"],
       "listRule": "",
       "viewRule": "",
       "createRule": "",
       "updateRule": "",
-      "deleteRule": ""
+      "deleteRule": "",
+      "fields": [
+        {
+          "name": "tag",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "value_type",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "semantic_dimension",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "uniqueness_rule",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        }
+      ]
     },
     {
       "name": "external_data",
       "type": "base",
-      "schema": [
-        { "name": "source", "type": "text", "required": false },
-        { "name": "tags", "type": "json", "required": true },
-        { "name": "payload", "type": "json", "required": true },
-        { "name": "is_active", "type": "bool", "required": false }
-      ],
       "indexes": [],
       "listRule": "",
       "viewRule": "",
       "createRule": "",
       "updateRule": "",
-      "deleteRule": ""
+      "deleteRule": "",
+      "fields": [
+        {
+          "name": "source",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "tags",
+          "type": "json",
+          "required": true
+        },
+        {
+          "name": "payload",
+          "type": "json",
+          "required": true
+        },
+        {
+          "name": "is_active",
+          "type": "bool",
+          "required": false
+        }
+      ]
     }
   ]
 }

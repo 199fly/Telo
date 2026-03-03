@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- Fixed PocketBase bootstrap by switching schema imports to `fields` format and renaming the profile collection to `profiles`.
+- Updated bot code to use the `profiles` collection and added admin auth guards before writes.
+- Hardened `start.sh` with env loading, health checks, and existing-port detection.
 - Refactored journaling to run as a structured `daily_checkin` routine with reusable blocks.
 - Replaced `journal_entries` writes with unified `block_entries` writes keyed by semantic tags.
 - Updated menu and quote interactions to match routine-driven behavior.

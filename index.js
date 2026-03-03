@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Telegraf } = require('telegraf');
-const pb = require('./pb');
+const { pb } = require('./pb');
 const onboarding = require('./workflows/onboarding');
 const journal = require('./workflows/journal');
 
@@ -38,7 +38,7 @@ bot.launch();
 
 async function getQuoteForUser(userId) {
   try {
-    const user = await pb.collection('users').getFirstListItem(`user_id="${userId}"`);
+    const user = await pb.collection('profiles').getFirstListItem(`user_id="${userId}"`);
     if (Array.isArray(user.quotes) && user.quotes.length > 0) {
       return user.quotes[Math.floor(Math.random() * user.quotes.length)];
     }

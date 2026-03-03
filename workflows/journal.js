@@ -1,30 +1,49 @@
 const pb = require('../pb');
 const { sendMainMenu } = require('./menu');
-
-const awaitingEntry = {};
+const { startRoutine, handleRoutineText } = require('./routines');
 
 async function start(ctx) {
   const userId = String(ctx.from.id);
-  awaitingEntry[userId] = true;
-  await ctx.reply('What would you like to journal about today?', {
-    reply_markup: { force_reply: true },
-  });
+  const user = await findUser(userId);
+  const quote = pickQuote(user?.quotes);
+
+  if (quote) {
+    await ctx.reply(`💬 ${quote}`);
+  }
+
+  if (user?.goal) {
+    await ctx.reply(`🎯 Goal reminder: ${user.goal}`);
+  }
+
+  await startRoutine(ctx, 'daily_checkin');
 }
 
 async function handleText(ctx) {
-  const userId = String(ctx.from.id);
-  if (!awaitingEntry[userId]) return false;
+  const routineResult = await handleRoutineText(ctx);
+  if (!routineResult) return false;
 
-  await pb.collection('journal_entries').create({
-    user_id: userId,
-    routine_type: 'free',
-    answers: { text: ctx.message.text },
-  });
+  if (routineResult.completed) {
+    await sendMainMenu(ctx);
+  }
 
-  awaitingEntry[userId] = false;
-  await ctx.reply('Journal entry saved.');
-  await sendMainMenu(ctx);
   return true;
+}
+
+async function findUser(userId) {
+  try {
+    return await pb.collection('users').getFirstListItem(`user_id="${userId}"`);
+  } catch (err) {
+    return null;
+  }
+}
+
+function pickQuote(quotes) {
+  if (!Array.isArray(quotes) || quotes.length === 0) {
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  return quotes[randomIndex];
 }
 
 module.exports = { start, handleText };

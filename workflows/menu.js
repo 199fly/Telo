@@ -2,10 +2,10 @@ const { Markup } = require('telegraf');
 
 function sendMainMenu(ctx) {
   return ctx.reply(
-    'Choose an option:',
+    'Choose a routine:',
     Markup.inlineKeyboard([
-      [Markup.button.callback('Journal', 'menu:journal')],
-      [Markup.button.callback('Quotes', 'menu:quotes')],
+      [Markup.button.callback('Daily Check-In', 'menu:journal')],
+      [Markup.button.callback('Inspiration Quote', 'menu:quotes')],
     ])
   );
 }

@@ -11,7 +11,7 @@
         { "name": "quotes", "type": "json", "required": false },
         { "name": "habits", "type": "json", "required": false }
       ],
-      "indexes": [],
+      "indexes": ["CREATE UNIQUE INDEX idx_users_user_id ON users (user_id)"],
       "listRule": "",
       "viewRule": "",
       "createRule": "",
@@ -19,30 +19,22 @@
       "deleteRule": ""
     },
     {
-      "name": "journal_entries",
+      "name": "block_entries",
       "type": "base",
       "schema": [
         { "name": "user_id", "type": "text", "required": true },
-        { "name": "routine_type", "type": "text", "required": true },
-        { "name": "answers", "type": "json", "required": true }
+        { "name": "routine_id", "type": "text", "required": false },
+        { "name": "block_id", "type": "text", "required": false },
+        { "name": "tags", "type": "json", "required": true },
+        { "name": "value", "type": "json", "required": true },
+        { "name": "metadata", "type": "json", "required": false },
+        { "name": "semantic_key", "type": "text", "required": false }
       ],
-      "indexes": [],
-      "listRule": "",
-      "viewRule": "",
-      "createRule": "",
-      "updateRule": "",
-      "deleteRule": ""
-    },
-    {
-      "name": "habit_logs",
-      "type": "base",
-      "schema": [
-        { "name": "user_id", "type": "text", "required": true },
-        { "name": "habit_name", "type": "text", "required": true },
-        { "name": "date", "type": "text", "required": true },
-        { "name": "count", "type": "number", "required": true }
+      "indexes": [
+        "CREATE INDEX idx_block_entries_user_id ON block_entries (user_id)",
+        "CREATE INDEX idx_block_entries_routine_id ON block_entries (routine_id)",
+        "CREATE INDEX idx_block_entries_semantic_key ON block_entries (semantic_key)"
       ],
-      "indexes": [],
       "listRule": "",
       "viewRule": "",
       "createRule": "",
@@ -50,14 +42,30 @@
       "deleteRule": ""
     },
     {
-      "name": "work_sessions",
+      "name": "tags_registry",
       "type": "base",
       "schema": [
-        { "name": "user_id", "type": "text", "required": true },
-        { "name": "date", "type": "text", "required": true },
-        { "name": "total_minutes", "type": "number", "required": true },
-        { "name": "sprint_count", "type": "number", "required": true },
-        { "name": "reflections", "type": "json", "required": false }
+        { "name": "tag", "type": "text", "required": true },
+        { "name": "value_type", "type": "text", "required": true },
+        { "name": "semantic_dimension", "type": "text", "required": false },
+        { "name": "uniqueness_rule", "type": "text", "required": false },
+        { "name": "description", "type": "text", "required": false }
+      ],
+      "indexes": ["CREATE UNIQUE INDEX idx_tags_registry_tag ON tags_registry (tag)"],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "",
+      "updateRule": "",
+      "deleteRule": ""
+    },
+    {
+      "name": "external_data",
+      "type": "base",
+      "schema": [
+        { "name": "source", "type": "text", "required": false },
+        { "name": "tags", "type": "json", "required": true },
+        { "name": "payload", "type": "json", "required": true },
+        { "name": "is_active", "type": "bool", "required": false }
       ],
       "indexes": [],
       "listRule": "",

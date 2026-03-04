@@ -33,6 +33,11 @@
           "required": false
         },
         {
+          "name": "focus_minutes",
+          "type": "number",
+          "required": false
+        },
+        {
           "name": "quotes",
           "type": "json",
           "required": false

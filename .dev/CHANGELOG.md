@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- Added new routine modes: Focus Mode, Break Reset, and Habit Check-In with tagged block entry writes.
+- Expanded onboarding to capture preferred focus duration and tracked habits, and wired these into routine personalization.
+- Extended Telegram menu/commands to expose all modes and documented the new flows in README.
 - Fixed PocketBase bootstrap by switching schema imports to `fields` format and renaming the profile collection to `profiles`.
 - Updated bot code to use the `profiles` collection and added admin auth guards before writes.
 - Hardened `start.sh` with env loading, health checks, and existing-port detection.

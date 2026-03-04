@@ -3,11 +3,17 @@ const { Telegraf } = require('telegraf');
 const { pb } = require('./pb');
 const onboarding = require('./workflows/onboarding');
 const journal = require('./workflows/journal');
+const { sendMainMenu } = require('./workflows/menu');
+const { startRoutine } = require('./workflows/routines');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx) => onboarding.start(ctx));
 bot.command('journal', (ctx) => journal.start(ctx));
+bot.command('focus', (ctx) => startRoutine(ctx, 'focus_mode'));
+bot.command('break', (ctx) => startRoutine(ctx, 'break_mode'));
+bot.command('habits', (ctx) => startRoutine(ctx, 'habit_checkin'));
+bot.command('menu', (ctx) => sendMainMenu(ctx));
 
 bot.on('text', async (ctx, next) => {
   const onboarded = await onboarding.handleText(ctx);
@@ -22,6 +28,21 @@ bot.on('text', async (ctx, next) => {
 bot.action('menu:journal', async (ctx) => {
   await ctx.answerCbQuery();
   await journal.start(ctx);
+});
+
+bot.action('menu:focus', async (ctx) => {
+  await ctx.answerCbQuery();
+  await startRoutine(ctx, 'focus_mode');
+});
+
+bot.action('menu:break', async (ctx) => {
+  await ctx.answerCbQuery();
+  await startRoutine(ctx, 'break_mode');
+});
+
+bot.action('menu:habits', async (ctx) => {
+  await ctx.answerCbQuery();
+  await startRoutine(ctx, 'habit_checkin');
 });
 
 bot.action('menu:quotes', async (ctx) => {

@@ -1321,3 +1321,28 @@ Never rely on PocketBase JSON uniqueness. Always enforce overwrite using semanti
 Keep code logic in Node, not in PocketBase. PB stores config only.
 Make every entry carry tags. Don’t store “tag” as a single string only—use array always.
 Treat work mode as a stateful loop, not a static list of blocks.
+---
+
+## Current Implemented Modes
+
+TELO now ships with four routine modes accessible from Telegram menu or slash commands:
+
+- **Daily Check-In** (`/journal`) — intention + reflection logging
+- **Focus Mode** (`/focus`) — define one priority task, choose sprint length, and set distraction commitment
+- **Break Reset** (`/break`) — pick a mindful reset activity and capture post-break state
+- **Habit Check-In** (`/habits`) — log status and notes for your configured habits
+
+All mode responses are persisted to `block_entries` with semantic tags for future analytics.
+
+## Onboarding Flow
+
+The onboarding flow collects a lightweight behavior profile in 6 steps:
+
+1. First name
+2. Preferred username
+3. Current primary goal
+4. Preferred focus sprint duration (minutes)
+5. 1–3 habits to track
+6. Optional favorite quote
+
+This profile is stored in `profiles` and used to personalize routine prompts (e.g., focus duration defaults and habit options).
